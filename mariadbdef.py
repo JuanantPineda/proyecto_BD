@@ -27,3 +27,18 @@ def listarMaterial(db):
             print(registro[0],registro[1],registro[2],registro[3],registro[4],registro[5],registro[6])
     except:
         print("Error en la consulta")
+
+def listarNombre(db):
+
+    cad= input("Introduzca el nombre del alumno: ")
+
+    sql=(f"select * from ninios where nombre = '{cad}'")
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        registros = cursor.fetchall()
+        print("El contenido de la tabla ninios son los siguientes:")
+        for registro in registros:
+            print(registro[0],registro[1],registro[2],registro[3],registro[4],registro[5],registro[6],registro[7],registro[8],registro[9],registro[10])
+    except:
+        print("Error en la consulta")

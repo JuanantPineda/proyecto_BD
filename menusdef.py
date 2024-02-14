@@ -21,7 +21,7 @@ def menuDB():
 def menuCRUD():
     menu = '''Bien venido al menu CRUD
     1. Listar todo el contenido de la tabla material
-    2.
+    2. Mostrar los alumnos que tenga cierto nombre
     3.
     4.
     5.

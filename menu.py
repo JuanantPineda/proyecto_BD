@@ -20,6 +20,9 @@ while bandera == True:
                 #Listamos el contenido de material
                 mariadbdef.listarMaterial(conexion)
                 print()
+            elif numero == 2:
+                mariadbdef.listarNombre(conexion)
+                print()
             elif numero == 7:
                 #Creeamos la conexion de MariaDB
                 mariadbdef.cerrarConexion(conexion)
