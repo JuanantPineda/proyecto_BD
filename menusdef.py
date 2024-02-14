@@ -6,8 +6,15 @@ def menuDB():
     4. Salir
     '''
     print(menu)
-
-    opcion = int(input("Elija un numero para ingresar en la base de datos: "))
+    while True:
+        try:
+            opcion = int(input("Elija un numero para ingresar en la base de datos: "))
+            while opcion > 4:
+                print("Tienes que elejir una opcion que este disponible")
+                opcion = int(input("Elija un numero para ingresar en la base de datos: "))
+            break
+        except ValueError:
+            print ("Debes introducir un número")
 
     return opcion
 
@@ -24,7 +31,15 @@ def menuCRUD():
 
     print(menu)
 
-    opcion = int(input("Elija un numero para probar la consulta: "))
+    while True:
+        try:
+            opcion = int(input("Elija un numero para probar la consulta: "))
+            while opcion > 7:
+                print("Tienes que elejir una opcion que este disponible")
+                opcion = int(input("Elija un numero para probar la consulta: "))
+            break
+        except ValueError:
+            print ("Debes introducir un número")
 
     return opcion
 

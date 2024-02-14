@@ -15,3 +15,15 @@ def cerrarConexion(db):
     print("Se ha cerrado la conexion")
     db.close()
 
+def listarMaterial(db):
+    
+    sql="select * from material"
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        registros = cursor.fetchall()
+        print("El contenido de la tabla material son los siguientes:")
+        for registro in registros:
+            print(registro[0],registro[1],registro[2],registro[3],registro[4],registro[5],registro[6])
+    except:
+        print("Error en la consulta")

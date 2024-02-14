@@ -9,11 +9,21 @@ while bandera == True:
     opcion = menusdef.menuDB()
     banderaCRUD = True
     if opcion == 1:
+        conexion = mariadbdef.conexionMariaDB()
+        print()
         while banderaCRUD == True:
-            conexion = mariadbdef.conexionMariaDB()
             #Me muestra el menudCRUD
             numero = menusdef.menuCRUD()
+            print()
             # Me conecta a MariaDB
-            if numero == 7:
+            if numero == 1:
+                #Listamos el contenido de material
+                mariadbdef.listarMaterial(conexion)
+                print()
+            elif numero == 7:
+                #Creeamos la conexion de MariaDB
                 mariadbdef.cerrarConexion(conexion)
                 banderaCRUD = False
+                print()
+    elif opcion == 4:
+        bandera = False
