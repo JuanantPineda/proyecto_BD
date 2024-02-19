@@ -15,30 +15,43 @@ def cerrarConexion(db):
     print("Se ha cerrado la conexion")
     db.close()
 
+#Listar el titulo de todos los materiales de la tabla materiales
+
 def listarMaterial(db):
-    
-    sql="select * from material"
+    sql="select Titulo from material"
     cursor = db.cursor()
     try:
         cursor.execute(sql)
-        registros = cursor.fetchall()
-        print("El contenido de la tabla material son los siguientes:")
-        for registro in registros:
-            print(registro[0],registro[1],registro[2],registro[3],registro[4],registro[5],registro[6])
+        if cursor.execute(sql) > 0:
+            registros = cursor.fetchall()
+            print("El contenido de la tabla material son los siguientes:")
+            print("Nombre Material:")
+            for registro in registros:
+                print("-",registro[0])
+            print("Número de registros seleccionados:", cursor.rowcount)
+        else:
+             print("No hay registros")
     except:
         print("Error en la consulta")
 
+#Listar el nombre de los alumnos que se pide por pantalla de la tabla alumnos
+        
 def listarNombre(db):
 
     cad= input("Introduzca el nombre del alumno: ")
 
-    sql=(f"select * from ninios where nombre = '{cad}'")
+    sql=(f"select Nombre,Apellidos,DNI from ninios where nombre = '{cad}'")
     cursor = db.cursor()
     try:
         cursor.execute(sql)
-        registros = cursor.fetchall()
-        print("El contenido de la tabla ninios son los siguientes:")
-        for registro in registros:
-            print(registro[0],registro[1],registro[2],registro[3],registro[4],registro[5],registro[6],registro[7],registro[8],registro[9],registro[10])
+        if cursor.execute(sql) > 0:
+            registros = cursor.fetchall()
+            print("El contenido de la tabla ninios son los siguientes:")
+            print(("{:<30}{:<30}{:<30}".format("Nombre","Apellidos","DNI")))
+            for registro in registros:
+                print("{:<30}{:<30}{:<30}".format(registro[0],registro[1],registro[2]))
+        else:
+            print("No hay registros")
+
     except:
         print("Error en la consulta")
