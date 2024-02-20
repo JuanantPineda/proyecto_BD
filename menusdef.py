@@ -24,7 +24,7 @@ def menuCRUD():
     2. Mostrar los alumnos que tenga cierto nombre
     3.
     4. Insertar datos en la tabla Material
-    5.
+    5. Elimina un matrial por su titulo
     6.
     7. Salir
     '''

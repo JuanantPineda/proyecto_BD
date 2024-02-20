@@ -25,8 +25,12 @@ while bandera == True:
                 print()
             elif numero == 4:
                 mariadbdef.insertarDatos(conexion)
+                print()
+            elif numero == 5:
+                mariadbdef.eliminarMaterial(conexion)
+                print()
             elif numero == 7:
-                #Creeamos la conexion de MariaDB
+                #Cerramos la conexion de MariaDB
                 mariadbdef.cerrarConexion(conexion)
                 banderaCRUD = False
                 print()

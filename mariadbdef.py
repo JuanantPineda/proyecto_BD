@@ -95,3 +95,19 @@ def insertarDatos(db):
         print("No se ha ingresado ningun dato")
         db.rollback()
 
+def eliminarMaterial(db):
+    titulo = input("Ingrese el titulo a eliminar: ")
+
+    cursor=db.cursor()
+    sql=(f"delete from material where titulo = '{titulo}'")
+
+    try:
+        cursor.execute(sql)
+        db.commit()
+        if cursor.rowcount==0:
+            print("No hay valores con ese dato")
+        else:
+            print("Se ha eliminado",titulo,"de la tabla material")
+    except :
+        print("No se ha eliminado ningun dato")
+        db.rollback()
