@@ -55,3 +55,43 @@ def listarNombre(db):
 
     except:
         print("Error en la consulta")
+
+def insertarDatos(db):
+
+    titulo = input("Ingrese el titulo del materia: ")
+    formato = input("Ingrese el formato del material: ")
+
+    estadoMaterial = input("Ingrese el estado funcional del material (usado o nuevo): ").lower()
+    while estadoMaterial not in ['usado', 'nuevo']:
+        print("Estado funcional del material no válido. Por favor, ingrese uno de los siguientes valores: usado o nuevo")
+        estadoMaterial = input("Ingrese el estado funcional del material nuevamente: ").lower()
+
+    estadoFuncional = input("Ingrese el estado del material (bueno, excelente, inutilizable, usado o regular): ").lower()
+    while estadoFuncional not in ['bueno', 'excelente', 'inutilizable', 'usado', 'regular']:
+        print("Estado del material no válido. Por favor, ingrese uno de los siguientes valores: bueno, excelente, inutilizable, usado o regular")
+        estadoFuncional = input("Ingrese el estado del material nuevamente: ").lower()
+
+    comentario= input("Ingrese un comentario del material: ")
+
+    while True:
+        try:
+            numEjemplares = int(input("Ingrese el numero de ejemplares que tiene ese material: "))
+            while numEjemplares <= 0:
+                print("Tienes que poner un numero acorde")
+                numEjemplares = int("Ingrese el numero de ejemplares que tiene ese material: ")
+            break
+        except ValueError:
+            print ("Debes introducir un número")
+
+    tipoMaterial = input("Ingrese el tipo de material que es: ")
+
+    cursor = db.cursor()
+    sql="insert into material values ('%s','%s','%s','%s','%s',%d,'%s')" % (titulo,formato,estadoMaterial,estadoFuncional,comentario,numEjemplares,tipoMaterial)
+    print (sql)
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        print("No se ha ingresado ningun dato")
+        db.rollback()
+

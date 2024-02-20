@@ -23,7 +23,7 @@ def menuCRUD():
     1. Listar todo el contenido de la tabla material
     2. Mostrar los alumnos que tenga cierto nombre
     3.
-    4.
+    4. Insertar datos en la tabla Material
     5.
     6.
     7. Salir

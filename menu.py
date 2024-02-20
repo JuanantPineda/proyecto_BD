@@ -23,6 +23,8 @@ while bandera == True:
             elif numero == 2:
                 mariadbdef.listarNombre(conexion)
                 print()
+            elif numero == 4:
+                mariadbdef.insertarDatos(conexion)
             elif numero == 7:
                 #Creeamos la conexion de MariaDB
                 mariadbdef.cerrarConexion(conexion)
