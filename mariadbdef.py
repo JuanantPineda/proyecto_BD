@@ -114,8 +114,17 @@ def eliminarMaterial(db):
 
 def actualizarTarifa(db):
 
-    descuento = int(input("Ingresa el descuento para la tarifa"))
-    idNinino = input("Ingrese el identificador del niño")
+    while True:
+        try:
+            descuento = int(input("Ingresa el descuento para la tarifa: "))
+            while descuento <= 0 or descuento >= 100:
+                print("Tienes que poner un numero acorde")
+                descuento = int(input("Ingresa el descuento para la tarifa: "))
+            break
+        except ValueError:
+            print ("Debes introducir un número")
+
+    idNinino = input("Ingrese el identificador del niño: ")
 
     sql=(f"UPDATE ninios SET Tarifa = Tarifa * ((100-{descuento}*0.01)*0.01) WHERE Id_ninio = '{idNinino}' ")
     cursor=db.cursor()
