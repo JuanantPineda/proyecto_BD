@@ -29,6 +29,9 @@ while bandera == True:
             elif numero == 5:
                 mariadbdef.eliminarMaterial(conexion)
                 print()
+            elif numero == 6:
+                mariadbdef.actualizarTarifa(conexion)
+                print()
             elif numero == 7:
                 #Cerramos la conexion de MariaDB
                 mariadbdef.cerrarConexion(conexion)

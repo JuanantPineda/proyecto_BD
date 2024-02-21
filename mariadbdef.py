@@ -111,3 +111,17 @@ def eliminarMaterial(db):
     except :
         print("No se ha eliminado ningun dato")
         db.rollback()
+
+def actualizarTarifa(db):
+
+    descuento = int(input("Ingresa el descuento para la tarifa"))
+    idNinino = input("Ingrese el identificador del niño")
+
+    sql=(f"UPDATE ninios SET Tarifa = Tarifa * ((100-{descuento}*0.01)*0.01) WHERE Id_ninio = '{idNinino}' ")
+    cursor=db.cursor()
+    try:
+        cursor.execute(sql)
+        db.commit()
+        print("Se ha actualizado correctamente los datos")
+    except Exception as e:
+        print("Error ", e)

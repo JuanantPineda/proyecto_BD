@@ -25,7 +25,7 @@ def menuCRUD():
     3.
     4. Insertar datos en la tabla Material
     5. Elimina un matrial por su titulo
-    6.
+    6. Hacer un decuento de la tarifa a cierto niño
     7. Salir
     '''
 
