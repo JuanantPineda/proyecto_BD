@@ -1,19 +1,28 @@
+import psycopg2
 import sys
-import MySQLdb
 
-def conexionMariaDB():
+def conexionPostgres():
+
     try:
-        db = MySQLdb.connect("localhost","pineda","pineda","proyecto" )
-    except MySQLdb.Error as e:
+        parametros = {
+        "host": "localhost",
+        "port": "5432",
+        "user": "pineda",
+        "password": "usuario",
+        "database": "consultas"
+     }
+        db = psycopg2.connect(**parametros)
+    except psycopg2.Error as e:
         print("No puedo conectar a la base de datos:",e)
         sys.exit(1)
     print("Conexión correcta.")
-    
+
     return db
 
 def cerrarConexion(db):
     print("Se ha cerrado la conexion")
     db.close()
+
 
 #Listar el titulo de todos los materiales de la tabla materiales
 
@@ -22,15 +31,13 @@ def listarMaterial(db):
     cursor = db.cursor()
     try:
         cursor.execute(sql)
-        if cursor.execute(sql) > 0:
-            registros = cursor.fetchall()
-            print("El contenido de la tabla material son los siguientes:")
-            print("Nombre Material:")
-            for registro in registros:
-                print("-",registro[0])
-            print("Número de registros seleccionados:", cursor.rowcount)
-        else:
-             print("No hay registros")
+        
+        registros = cursor.fetchall()
+        print("El contenido de la tabla material son los siguientes:")
+        print("Nombre Material:")
+        for registro in registros:
+            print("-",registro[0])
+        print("Número de registros seleccionados:", cursor.rowcount)
     except:
         print("Error en la consulta")
 
@@ -44,15 +51,11 @@ def listarNombre(db):
     cursor = db.cursor()
     try:
         cursor.execute(sql)
-        if cursor.execute(sql) > 0:
-            registros = cursor.fetchall()
-            print("El contenido de la tabla ninios son los siguientes:")
-            print(("{:<30}{:<30}{:<30}".format("Nombre","Apellidos","DNI")))
-            for registro in registros:
-                print("{:<30}{:<30}{:<30}".format(registro[0],registro[1],registro[2]))
-        else:
-            print("No hay registros")
-
+        registros = cursor.fetchall()
+        print("El contenido de la tabla ninios son los siguientes:")
+        print(("{:<30}{:<30}{:<30}".format("Nombre","Apellidos","DNI")))
+        for registro in registros:
+            print("{:<30}{:<30}{:<30}".format(registro[0],registro[1],registro[2]))
     except:
         print("Error en la consulta")
 
@@ -66,19 +69,14 @@ def listarAlumnos(db):
     cursor = db.cursor()
     try:
         cursor.execute(sql)
-        if cursor.execute(sql) > 0:
-            registros = cursor.fetchall()
-            print("Los alumnos que pertenecen a la aula",cad ,"son los siguientes:")
-            print(("{:<30}{:<30}".format("Nombre","Apellidos")))
-            for registro in registros:
-                print("{:<30}{:<30}".format(registro[0],registro[1]))
-        else:
-            print("No hay registros")
+        registros = cursor.fetchall()
+        print("Los alumnos que pertenecen a la aula",cad ,"son los siguientes:")
+        print(("{:<30}{:<30}".format("Nombre","Apellidos")))
+        for registro in registros:
+            print("{:<30}{:<30}".format(registro[0],registro[1]))
 
     except:
         print("Error en la consulta")
-
-#Insertar datos en la tabla material
 
 def insertarDatos(db):
 

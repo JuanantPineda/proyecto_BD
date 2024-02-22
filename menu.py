@@ -1,5 +1,6 @@
 import menusdef
 import mariadbdef
+import postgresdef
 
 bandera = True
 banderaCRUD = True
@@ -23,6 +24,9 @@ while bandera == True:
             elif numero == 2:
                 mariadbdef.listarNombre(conexion)
                 print()
+            elif numero == 3:
+                mariadbdef.listarAlumnos(conexion)
+                print()
             elif numero == 4:
                 mariadbdef.insertarDatos(conexion)
                 print()
@@ -35,6 +39,36 @@ while bandera == True:
             elif numero == 7:
                 #Cerramos la conexion de MariaDB
                 mariadbdef.cerrarConexion(conexion)
+                banderaCRUD = False
+                print()
+    elif opcion == 2:
+        conexion2 = postgresdef.conexionPostgres()
+        print()
+        while banderaCRUD == True:
+            numero2 = menusdef.menuCRUD()
+            print()
+            if numero2 == 1:
+                #Listamos el contenido de material
+                postgresdef.listarMaterial(conexion2)
+                print()
+            elif numero2 == 2:
+                postgresdef.listarNombre(conexion2)
+                print()
+            elif numero2 == 3:
+                postgresdef.listarAlumnos(conexion2)
+                print()
+            elif numero2 == 4:
+                postgresdef.insertarDatos(conexion2)
+                print()
+            elif numero2 == 5:
+                postgresdef.eliminarMaterial(conexion2)
+                print()
+            elif numero2 == 6:
+                postgresdef.actualizarTarifa(conexion2)
+                print()
+            elif numero2 == 7:
+                #Cerramos la conexion de MariaDB
+                postgresdef.cerrarConexion(conexion2)
                 banderaCRUD = False
                 print()
     elif opcion == 4:
