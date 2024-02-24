@@ -1,5 +1,6 @@
 import sys
 import MySQLdb
+import psycopg2
 
 def conexionMariaDB():
     try:
@@ -14,6 +15,32 @@ def conexionMariaDB():
 def cerrarConexion(db):
     print("Se ha cerrado la conexion")
     db.close()
+
+
+def menuCRUD():
+    menu = '''Bien venido al menu CRUD
+    1. Listar todo el contenido de la tabla material
+    2. Mostrar los alumnos que tenga cierto nombre
+    3. Mostrar los alumnos que hay en cierta aula
+    4. Insertar datos en la tabla Material
+    5. Elimina un matrial por su titulo
+    6. Hacer un decuento de la tarifa a cierto niño
+    7. Salir
+    '''
+
+    print(menu)
+
+    while True:
+        try:
+            opcion = int(input("Elija un numero para probar la consulta: "))
+            while opcion > 7:
+                print("Tienes que elejir una opcion que este disponible")
+                opcion = int(input("Elija un numero para probar la consulta: "))
+            break
+        except ValueError:
+            print ("Debes introducir un número")
+
+    return opcion
 
 #Listar el titulo de todos los materiales de la tabla materiales
 
@@ -30,7 +57,7 @@ def listarMaterial(db):
                 print("-",registro[0])
             print("Número de registros seleccionados:", cursor.rowcount)
         else:
-             print("No hay registros")
+            print("No hay registros")
     except:
         print("Error en la consulta")
 
@@ -158,3 +185,78 @@ def actualizarTarifa(db):
         print("Se ha actualizado correctamente los datos")
     except Exception as e:
         print("Error ", e)
+
+def conexionPostgres():
+
+    try:
+        parametros = {
+        "host": "localhost",
+        "port": "5432",
+        "user": "pineda",
+        "password": "usuario",
+        "database": "consultas"
+        }
+        db = psycopg2.connect(**parametros)
+    except psycopg2.Error as e:
+        print("No puedo conectar a la base de datos:",e)
+        sys.exit(1)
+    print("Conexión correcta.")
+
+    return db
+
+def cerrarConexion(db):
+    print("Se ha cerrado la conexion")
+    db.close()
+
+
+#Listar el titulo de todos los materiales de la tabla materiales
+
+def listarMaterialPostgres(db):
+    sql="select Titulo from material"
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        
+        registros = cursor.fetchall()
+        print("El contenido de la tabla material son los siguientes:")
+        print("Nombre Material:")
+        for registro in registros:
+            print("-",registro[0])
+        print("Número de registros seleccionados:", cursor.rowcount)
+    except:
+        print("Error en la consulta")
+
+#Listar el nombre de los alumnos que se pide por pantalla de la tabla alumnos
+        
+def listarNombrePostgres(db):
+
+    cad= input("Introduzca el nombre del alumno: ")
+
+    sql=(f"select Nombre,Apellidos,DNI from ninios where nombre = '{cad}'")
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        registros = cursor.fetchall()
+        print("El contenido de la tabla ninios son los siguientes:")
+        print(("{:<30}{:<30}{:<30}".format("Nombre","Apellidos","DNI")))
+        for registro in registros:
+            print("{:<30}{:<30}{:<30}".format(registro[0],registro[1],registro[2]))
+    except:
+        print("Error en la consulta")
+
+def listarAlumnosPostgres(db):
+    
+    cad= input("Introduzca el identificador de la aula: ")
+
+    sql=(f"select Nombre,Apellidos from ninios where Id_aula = '{cad}'")
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        registros = cursor.fetchall()
+        print("Los alumnos que pertenecen a la aula",cad ,"son los siguientes:")
+        print(("{:<30}{:<30}".format("Nombre","Apellidos")))
+        for registro in registros:
+            print("{:<30}{:<30}".format(registro[0],registro[1]))
+
+    except:
+        print("Error en la consulta")
