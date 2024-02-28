@@ -8,7 +8,7 @@ def conexionMariaDB():
     except MySQLdb.Error as e:
         print("No puedo conectar a la base de datos:",e)
         sys.exit(1)
-    print("Conexión correcta.")
+    print("Conexión correcta en MariaDB")
     
     return db
 
@@ -138,8 +138,8 @@ def insertarDatos(db):
 
     cursor = db.cursor()
     sql="insert into material values ('%s','%s','%s','%s','%s',%d,'%s')" % (titulo,formato,estadoMaterial,estadoFuncional,comentario,numEjemplares,tipoMaterial)
-    print (sql)
     try:
+        print("Se ha ingresado correctamente los datos")
         cursor.execute(sql)
         db.commit()
     except:
@@ -197,17 +197,12 @@ def conexionPostgres():
         "database": "consultas"
         }
         db = psycopg2.connect(**parametros)
+        print("Conexión correcta en Postgres")
     except psycopg2.Error as e:
         print("No puedo conectar a la base de datos:",e)
         sys.exit(1)
-    print("Conexión correcta.")
 
     return db
-
-def cerrarConexion(db):
-    print("Se ha cerrado la conexion")
-    db.close()
-
 
 #Listar el titulo de todos los materiales de la tabla materiales
 

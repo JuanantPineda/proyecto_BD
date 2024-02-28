@@ -10,6 +10,7 @@ Muestrame todo el contenido de la tabla material y ademas cuentame las lineas qu
 Muestrame el nombre del alumno, los apellidos y el dni de todos los alumnos se le pedira que se ingrese un nombre y te muestre todos los datos de ese alumno
 
 **Buscar información relacionada:**
+Muestrame los alumnos que hay en cierta aula para ello se pedira el identificador de la aula y nos mostrara los alumnos que hay en ella
 
 **Insertar información:**
 Insertame datos en la tabla de materia para ello deberas de pedir por teclado todos los datos de la tabla material
